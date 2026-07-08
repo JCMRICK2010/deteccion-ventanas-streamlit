@@ -1,7 +1,8 @@
 # Detección de ventanas
 
 App de Streamlit para probar 4 modelos entrenados de detección/segmentación de ventanas en fachadas: YOLOv8, YOLOv8-seg, YOLOv11-seg y Detectron2.
-
+App en línea sin Detectron 2:
+https://deteccion-ventanas-app-gfhaveom9ybv3dd7s558dn.streamlit.app/
 ## Uso local
 
 ```bash

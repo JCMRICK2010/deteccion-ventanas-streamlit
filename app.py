@@ -23,8 +23,14 @@ MODELOS_DISPONIBLES = {
     "YOLOv8 (detección)": {"tipo": "yolo", "path": YOLOV8_PATH},
     "YOLOv8-seg (segmentación)": {"tipo": "yolo", "path": YOLOV8SEG_PATH},
     "YOLOv11-seg (segmentación)": {"tipo": "yolo", "path": YOLOV11SEG_PATH},
-    "Detectron2 (detección)": {"tipo": "detectron2", "path": DETECTRON2_WEIGHTS},
 }
+
+try:
+    import detectron2  # noqa: F401
+    DETECTRON2_DISPONIBLE = True
+    MODELOS_DISPONIBLES["Detectron2 (detección)"] = {"tipo": "detectron2", "path": DETECTRON2_WEIGHTS}
+except ImportError:
+    DETECTRON2_DISPONIBLE = False
 
 st.set_page_config(page_title="Detección de ventanas", layout="wide")
 
@@ -112,6 +118,8 @@ with st.sidebar:
     st.header("Configuración")
     modelo_elegido = st.selectbox("Modelo a usar", list(MODELOS_DISPONIBLES.keys()))
     conf = st.slider("Umbral de confianza", 0.0, 1.0, 0.30, 0.05)
+    if not DETECTRON2_DISPONIBLE:
+        st.caption("ℹ️ Detectron2 no está instalado en este entorno; corre la app localmente para usarlo.")
 
 archivos = st.file_uploader(
     "Sube una o varias imágenes",

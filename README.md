@@ -23,4 +23,10 @@ requirements.txt     # dependencias
 
 ## Nota sobre Detectron2
 
-Detectron2 no está en PyPI y se instala desde su repositorio de GitHub (ver `requirements.txt`). La compilación puede tardar varios minutos en la primera instalación.
+Detectron2 no está incluido en `requirements.txt` porque no está en PyPI (se compila desde su repo de GitHub) y falla al desplegarse en Streamlit Community Cloud (sin GPU y con límites de build). La app detecta automáticamente si Detectron2 está instalado: si no lo está, simplemente oculta esa opción del selector.
+
+Para usar el modelo Detectron2 en local, instálalo aparte después del resto de dependencias:
+
+```bash
+pip install 'git+https://github.com/facebookresearch/detectron2.git'
+```
